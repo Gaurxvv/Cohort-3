@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        input[type="text"] {
+            width: 300px;
+            padding: 10px;
+            border: 2px solid #333;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            background-color: #1e1e1e;
+            color: #ffffff;
+            outline: none;
+        }
+
+        button {
+            background-color: #6200ea;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            margin-left: 5px;
+        }
+
+        button:hover {
+            background-color: #3700b3;
+        }
+
+        .todo-item {
+            background: #1e1e1e;
+            padding: 10px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 10px 0;
+            border: 1px solid #333;
+        }
+
+        .delete-btn {
+            background-color: #b00020;
+            color: #fff;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .delete-btn:hover {
+            background-color: #7b0014;
+        }
+    </style>
+</head>
+
+<body>
+    <input id="inp" type="text" placeholder="Add your ToDo here"></input>
+    <button onclick="addtodo()">Add todo!</button>
+
+    <script>
+
+        function addtodo() {
+            const el = document.querySelector("#inp"); // get
+            const textnode = document.createElement("div");  //create
+            textnode.setAttribute("id", "todo-" + ctr);
+            textnode.setAttribute("class", "todo-item");
+            textnode.innerHTML = "<div>" + el.value + "</div><button class='delete-btn' onclick='deletetodo(" + ctr + ")'>Delete</button>";  //get inner value 
+            document.querySelector("body").append(textnode); //append
+            ctr++;
+        }
+
+        let ctr = 1;
+        function deletetodo(index) {
+            const el = document.getElementById("todo-" + index);
+            el.parentElement.removeChild(el);
+        }
+    </script>
+</body>
+
+</html>
