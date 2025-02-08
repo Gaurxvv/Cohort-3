@@ -1,0 +1,10 @@
+[
+    {
+        "task": "Finish my project",
+        "done": false
+    },
+    {
+        "task": "lec-1 done",
+        "done": true
+    }
+]
