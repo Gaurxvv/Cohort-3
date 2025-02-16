@@ -1,0 +1,22 @@
+const input = [2, 3, 45, 5, 6, 7];
+const tranform = input.filter((num) => num % 2 == 0).map((num) => num * 2);
+console.log(tranform);
+//------------------------------------------------------------------------------
+const people = [
+  { name: "Alice", age: 22 },
+  { name: "Bob", age: 17 },
+  { name: "Charlie", age: 25 },
+  { name: "David", age: 15 },
+];
+const get = people
+  .filter((person) => person.age > 18)
+  .map((person) => person.name.toUpperCase());
+console.log(get);
+//------------------------------------------------------------------------------
+const numbers = [5, 12, 8, 20, 7, 15];
+const result = numbers
+  .filter((num) => num > 10)
+  .map((num) => num ** 2)
+  .reduce((sum, num) => sum + num, 0);
+
+console.log(result);
