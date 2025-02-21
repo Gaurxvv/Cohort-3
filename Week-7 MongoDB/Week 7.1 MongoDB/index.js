@@ -7,7 +7,7 @@ const JWT_SECRET = "hehehehe";
 
 // Connect to MongoDB
 mongoose.connect(
-  "mongodb+srv://admin:MW4KyvgvfhVAKXJr@cluster0.yn4ej.mongodb.net/todo-app-database"
+  "mongodb+srv://admin:b5UwP21DHYdTS1fQ@cluster0.yn4ej.mongodb.net/todo-app-database"
 );
 
 const app = express();
@@ -21,12 +21,6 @@ app.post("/signup", async (req, res) => {
     if (!email || !password || !name) {
       return res.status(400).json({ message: "All fields are required" });
     }
-
-    const existingUser = await UserModel.findOne({ email });
-    if (existingUser) {
-      return res.status(400).json({ message: "Email already in use" });
-    }
-
     await UserModel.create({ email, password, name });
 
     res.json({ message: "You are Signed Up" });
