@@ -7,7 +7,7 @@ const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
 
 mongoose.connect(
-  "mongodb+srv://admin:b5UwP21DHYdTS1fQ@cluster0.yn4ej.mongodb.net/todo-app-database"
+  ""
 );
 
 const app = express();
