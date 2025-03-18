@@ -1,0 +1,25 @@
+
+import { useEffect, useState } from "react";
+
+export function useFetch(url, retryTime) {
+  const [post, setPost] = useState({});
+  const [loading, setLoading] = useState(true);
+  async function getPosts() {
+    setLoading(true);
+    console.log("hehe");
+    const response = await fetch(url);
+    const data = await response.json();
+    setPost(data);
+    setLoading(false);
+  }
+  useEffect(() => {
+    getPosts();
+  }, [url]);
+  useEffect(() => {
+    const valid = setInterval(getPosts, retryTime * 1000);
+    return () => {
+      clearInterval(valid);
+    };
+  });
+  return { post, loading };
+}
