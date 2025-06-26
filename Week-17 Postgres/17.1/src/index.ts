@@ -1,8 +1,6 @@
 import { Client } from "pg";
 
-const pgClient = new Client(
-  "postgresql://neondb_owner:npg_G8QgHAUnM2lN@ep-withered-lab-a8e721e3-pooler.eastus2.azure.neon.tech/neondb?sslmode=require"
-);
+const pgClient = new Client("");
 async function initializeDatabase() {
   try {
     await pgClient.connect();
