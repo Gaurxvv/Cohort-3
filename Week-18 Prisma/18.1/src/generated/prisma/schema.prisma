@@ -9,17 +9,19 @@ datasource db {
 }
 
 model User {
-  id       Int    @id @default(autoincrement())
-  username String @unique
-  password String
-  age      Int
-  city     String
+  id       Int     @id @default(autoincrement()) // Primary key, auto-incremented for unique identification.
+  username String  @unique // A unique username for each user.
+  password String // Stores the user's password.
+  age      Int // Stores the user's age as an integer.
+  city     String? // An optional field for the user's city (can be null).
+  todos    Todo[] // Establishes a one-to-many relationship with the 'Todo' model.
 }
 
+// Defines the 'Todo' model, which maps to another database table.
 model Todo {
-  id          Int     @id @default(autoincrement())
-  title       String
-  description String
-  doone       Boolean @default(false)
-  userId      Int
+  id          Int    @id @default(autoincrement()) // Primary key, auto-incremented for unique identification.
+  title       String // The title of the todo item.
+  description String // A detailed description of the todo item.
+  userId      Int // A foreign key referencing the associated user (not explicitly defined as a relation here).
+  user        User   @relation(fields: [userId], references: [id]) // Defines the relationship to the 'User' model, linking 'userId' to the 'id' in 'User'.
 }

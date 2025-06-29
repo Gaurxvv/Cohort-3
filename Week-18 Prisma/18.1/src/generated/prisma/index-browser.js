@@ -132,7 +132,6 @@ exports.Prisma.TodoScalarFieldEnum = {
   id: 'id',
   title: 'title',
   description: 'description',
-  doone: 'doone',
   userId: 'userId'
 };
 
@@ -144,6 +143,11 @@ exports.Prisma.SortOrder = {
 exports.Prisma.QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
+};
+
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
 };
 
 

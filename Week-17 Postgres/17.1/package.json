@@ -15,7 +15,11 @@
     "@prisma/client": "^6.10.1",
     "@types/express": "^5.0.3",
     "express": "^5.1.0",
+    "pg": "^8.16.3",
     "prisma": "^6.10.1",
     "typescript": "^5.8.3"
+  },
+  "devDependencies": {
+    "@types/pg": "^8.15.4"
   }
 }
