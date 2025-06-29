@@ -1,32 +1,46 @@
-import { Client } from "pg";
+import { PrismaClient } from "@prisma/client";
+import express from "express";
 
-const pgClient = new Client("");
-async function initializeDatabase() {
-  try {
-    await pgClient.connect();
-    await pgClient.query(`
-      CREATE TABLE IF NOT EXISTS SQL_String (
-        id SERIAL PRIMARY KEY,              
-        username VARCHAR(50) UNIQUE NOT NULL, 
-        email VARCHAR(255) UNIQUE NOT NULL,   
-        password VARCHAR(255) NOT NULL,       
-        created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP 
-      );
-    `);
-    console.log("Table initialized successfully.");
-  } catch (err) {
-    console.error("Error during table initialization:", err);
-  }
+const client = new PrismaClient();
+const app = express();
+
+app.use(express.json());
+
+app.get("/users", async (req, res) => {
+  const users = await client.user.findMany();
+  res.json(users);
+});
+
+app.get("/todos/:id", async (req, res) => {
+  const id = req.params.id;
+  const users = await client.user.findFirst({
+    where: {
+      id: parseInt(id),
+    },
+    select: {
+      todos: true,
+      username: true,
+      password: true,
+    },
+  });
+  res.json(users);
+});
+
+async function readUser() {
+  const user = await client.user.findFirst({
+    where: {
+      id: 1,
+    },
+    include: {
+      todos: true,
+    },
+  });
+
+  console.log(user);
 }
 
-async function insertData(username: string, email: string, password: string) {
-  try {
-    const insertQuery =
-      "INSERT INTO SQL_String (username, email, password) VALUES ($1, $2, $3)";
-    const values = [username, email, password];
-    const res = await pgClient.query(insertQuery, values);
-    console.log("Insertion success:", res);
-  } catch (err) {
-    console.error("Error during the insertion:", err);
-  }
-}
+// Call the readUser function to execute it
+readUser();
+
+// Start the Express server on port 3000
+app.listen(3000);
